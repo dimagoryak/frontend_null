@@ -12,7 +12,6 @@ const SearchSection = () => {
           <option value="Category">Category</option>
           <option value="Noname">Noname</option>
           <option value="Shototam">Shototam</option>
-          {/* <option></option> */}
         </select>
         <input className={classname(styles['search-input'], `font`)} type="text" name="search" placeholder=""></input>
         <input className={classname(styles['search-button'], `font`)} type="submit" value="Start Searching"></input>
