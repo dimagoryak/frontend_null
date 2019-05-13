@@ -30,7 +30,7 @@
     margin: 4vh 0 0 0;
     height: 7.6vh;
     text-align: center;
-
+    
     select {
         font-size: 0.8em;
         height: 7.6vh;
@@ -41,12 +41,14 @@
         border-radius: .5vw 0 0 .5vw;
         float: center;
         text-align-last:center;
+        box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
     }
 
     input {
         padding: 0;
         height: 7.6vh;
         border: 0;
+        box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
     }
 
     .search-input {

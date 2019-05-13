@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import styles from './index.module.scss';
-import classname from 'classnames';
+import * as classname from 'classnames';
 
 const CommentSection = () => {
   return <div className={styles.header}>

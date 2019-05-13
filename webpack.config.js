@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production';
  
 module.exports = {
-  entry: "./src/index.jsx",
+  entry: "./src/index.tsx",
   mode: "development",
   module: {
     rules: [
@@ -15,6 +15,16 @@ module.exports = {
             loader: "babel-loader"
         }
       },
+      {
+        test: /\.(ts|tsx)$/,
+        use: [{
+          loader: require.resolve('ts-loader'),
+          options: {
+            // disable type checker - we will use it in fork plugin
+            transpileOnly: true
+          }
+        }]
+      }, 
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
@@ -59,11 +69,11 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx", ".scss"] },
+  resolve: { extensions: [".ts", ".tsx", ".js",".jsx",".scss"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
-    filename: "bundle.js"
+    filename: "bundle.min.js"
   },
   devServer: {
     contentBase: path.join(__dirname, "public/"),

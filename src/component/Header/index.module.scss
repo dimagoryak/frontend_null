@@ -1,10 +1,29 @@
-footer {
-    
+header {
+    //pos
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
     width: 100%;
     background: linear-gradient(0.25turn, #e6e7eb, #e4e5e9, #e3e4e8);
 
+    [class="container"] {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo {
+        justify-items: flex-start;
+        align-self: center;
+
+        img {
+            width: 185px;
+        }
+    }
+
     .navbar {
-        justify-content: center;
+        justify-items: flex-end;
+        align-self: center;
         padding: 0;
         text-align: center;
         display: flex;
@@ -23,10 +42,11 @@ footer {
         }
 
         .before-sign {
-            padding-right: 15px;
+            padding-right: 24px;
         }
 
         .sign-button {
+            padding-left: 24px;
             border-left: 1px solid #d1d1d1;
         }
     }
