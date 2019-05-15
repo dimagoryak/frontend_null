@@ -20,7 +20,7 @@ export default class PopularProducts extends React.Component<Props, any> {
         <h4>This is the list of products that are most interested in users</h4>
         <div className={classname(styles['block-products'], `container`)}>
           {this.props.products.map((element, index) => (
-            <div className={classname(styles['block-product'])}>
+            <div key={index} className={classname(styles['block-product'])}>
               <div className={styles['block-image']}>
                 <img alt={"product" + index + 1} src={element.image} />
               </div>

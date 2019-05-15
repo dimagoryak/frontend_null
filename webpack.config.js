@@ -2,17 +2,16 @@ const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production';
- 
+
 module.exports = {
   entry: "./src/index.tsx",
   mode: "development",
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-            loader: "babel-loader"
+          loader: "babel-loader"
         }
       },
       {
@@ -24,7 +23,7 @@ module.exports = {
             transpileOnly: true
           }
         }]
-      }, 
+      },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
@@ -69,7 +68,9 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: [".ts", ".tsx", ".js",".jsx",".scss"] },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".scss", ".css"]
+  },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
@@ -83,8 +84,9 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin(),
-            new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : '[name].[hash].css',
-            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-            })]
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    })
+  ]
 };

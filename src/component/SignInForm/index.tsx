@@ -19,12 +19,8 @@ class SignInForm extends React.Component {
     this.setState({ pass: event.target.value });
   }
 
-  /* WebApi.get('/users/maecapozzi')
-  .then((response: any) =>  this.setState({ token: response.data.name})) */
-
   handleSubmit = event => {
     event.preventDefault();
-
     let data = {
       auth: {
         email: this.state.login,
@@ -34,17 +30,16 @@ class SignInForm extends React.Component {
     WebApi.post('/api/user_token', data)
       .then((response: any) => {
         this.setState({ token: response.data.jwt });
-        localStorage.clear();
-        localStorage.setItem('JWToken', this.state.token);
-        localStorage.setItem('UserEmail', this.state.login);
-        location.replace('/');
       });
+
+    localStorage.clear();
+    localStorage.setItem('JWToken', this.state.token);
+    localStorage.setItem('UserEmail', this.state.login);
+    location.replace('/');
   }
 
 
-
   render() {
-
     return <form onSubmit={this.handleSubmit} className={classname(styles['sign-container'], `container`)}>
       <div className={styles['flex-container']}>
         <h2>Log in</h2>

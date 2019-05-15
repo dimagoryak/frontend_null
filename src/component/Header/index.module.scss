@@ -6,6 +6,7 @@ header {
     position: fixed;
     width: 100%;
     background: linear-gradient(0.25turn, #e6e7eb, #e4e5e9, #e3e4e8);
+    z-index: 1;
 
     [class="container"] {
         display: flex;

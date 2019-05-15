@@ -48,6 +48,8 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^3.0.0",
+    "react-slick": "^0.24.0",
+    "slick-carousel": "^1.8.1",
     "ts-loader": "^6.0.0"
   },
   "jest": {

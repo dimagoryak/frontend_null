@@ -5,18 +5,21 @@ import { Link } from 'react-router-dom';
 import classname from 'classnames';
 
 
-class Header extends React.Component<{}, { isLog: boolean }> {
+class Header extends React.Component<{}, { label1: string, label2: string }> {
 
   constructor(props) {
     super(props);
-    this.state = { isLog: localStorage.getItem("UserEmail") != undefined ? true : false };
+    this.state = {
+      label1: localStorage.getItem("UserEmail") != undefined ? localStorage.getItem("UserEmail") as string : 'log in',
+      label2: localStorage.getItem("UserEmail") != undefined ? 'exit' : 'sign up'
+    };
   }
 
-
-
   exitFunc = event => {
-    localStorage.clear();
-    location.reload();
+    if (this.state.label2 == 'exit') {
+      localStorage.clear();
+      location.reload();
+    }
   }
 
   render() {
@@ -28,15 +31,8 @@ class Header extends React.Component<{}, { isLog: boolean }> {
         <nav className={styles.navbar}>
           <Link to="/">all products</Link>
           <Link to="/abra">about us</Link>
-          {this.state.isLog ? <Link to="/" className={styles['before-sign']}>{localStorage.getItem("UserEmail")}</Link>
-            : <Link to="/signIn" className={styles['before-sign']}>log in</Link>}
-          {this.state.isLog ? <Link to="/" onClick={this.exitFunc}  className={styles['sign-button']}>exit</Link>
-            : <Link to="/signUp" className={styles['sign-button']}>sign up</Link>}
-
-          
-
-
-
+          <Link to="/signIn" className={styles['before-sign']}>{this.state.label1}</Link>
+          <Link to="/signUp" onClick={this.exitFunc} className={styles['sign-button']}>{this.state.label2}</Link>
         </nav>
       </div>
     </header>

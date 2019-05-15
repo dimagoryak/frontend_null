@@ -5,14 +5,16 @@ import Home from './containers/home';
 import NotFound from './component/NotFound';
 import SignIn from './containers/signIn';
 import SignUp from './containers/signUp';
+import { AuthRoute } from './CustomRoute';
 
 const Router = () => {
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/signIn" component={SignIn} />
-        <Route path="/signUp" component={SignUp} />
+        <AuthRoute path="/signIn" component={SignIn} />
+        <AuthRoute path="/signUp" component={SignUp} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

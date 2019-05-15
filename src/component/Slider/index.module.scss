@@ -1,0 +1,43 @@
+.comment-slide {
+    background-color: #f7f6f9;
+    border-radius: 2rem;
+    display: flex !important;
+    flex-flow: column;
+    align-items: center;
+
+    .photo {
+        background-color: #f7f6f9;
+        position: absolute;
+        height: 140px;
+        width: 140px;
+        top: -55px;
+        padding: 7px;
+        border-radius: 50%;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .comment {
+        margin: 115px 65px 65px 65px;
+        font-size: .8em;
+        font-weight: 600;
+        line-height: 25px;
+    }
+
+    .name {
+        color: #4dadbb;
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .work {
+        font-style: italic;
+        margin: 15px 0 42px 0;
+        font-size: 0.9em;
+        font-weight: 300;
+    }
+}

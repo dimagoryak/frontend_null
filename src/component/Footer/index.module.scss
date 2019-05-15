@@ -1,33 +1,34 @@
 footer {
-    
-    width: 100%;
-    background: linear-gradient(0.25turn, #e6e7eb, #e4e5e9, #e3e4e8);
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    background-color: #323232;
 
-    .navbar {
-        justify-content: center;
-        padding: 0;
-        text-align: center;
+    .nav-container {
         display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin-bottom: 48px;
+
+        img {
+            max-width: 88px;
+            margin: 15px;
+        }
 
         a {
+            font-size: .8em;
             text-transform: uppercase;
             text-decoration: none;
-            font-weight: 600;
-            color: black;
-            font-size: 0.8em;
-            padding: 15px;
+            color: white;
+            font-weight: 500;
+            margin: 18px;
         }
+    }
 
-        a:hover {
-            color: gray;
-        }
-
-        .before-sign {
-            padding-right: 15px;
-        }
-
-        .sign-button {
-            border-left: 1px solid #d1d1d1;
-        }
+    .copyright {
+        font-size: 1em;
+        background-color: #272727;
+        color: white;
+        font-weight: 200;
     }
 }

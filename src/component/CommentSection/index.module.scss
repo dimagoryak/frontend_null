@@ -1,24 +1,27 @@
-.header {
+.comments-container {
+    display: flex;    
+    flex-flow:column;
+    text-align: center;
+    align-items:center;
     background-color: #4DADBB;
-    background-size: cover;
-    position: inherit;
-    height: 100vh;
-    width: auto;
-}
+    
 
-.flex-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 20vh;
-}
+    h2 {
+        font-size: 2em;
+        font-weight: 300;
+        color: white;
+        margin: 68px auto 0 auto;
+    }
 
-.green {
-    color: #0E7200; 
-}
+    h4 {
+        font-size: 1em;
+        font-weight: 300;
+        color:white;
+        margin: 24px 0 0 0;
+    }
 
-.flex-item {
-    margin: 0;
-    font-weight: bold;
-    font-size: 1em;
+    .slider-container {
+        max-width: 80%;
+        margin-bottom: 185px;
+    }
 }
