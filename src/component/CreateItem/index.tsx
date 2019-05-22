@@ -12,12 +12,11 @@ class CreateItem extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      item: {},
       name: '',
       price: '',
       categories: [],
-      categoryId: '0',
-      currentCategorie: 'Default',
+      categoryId: 0,
+      currentCategory: 'Default',
       checkOptions: [],
       config: {
         headers: {
@@ -28,23 +27,30 @@ class CreateItem extends React.Component<Props, any> {
     };
   }
 
+  convertOptions(opt: any) {
+    let res: number[] = new Array(opt.length);
+    for (var index in opt) {
+      res[index] = opt[index].id as number;
+    }
+    return res;
+  }
   componentDidMount() {
-    WebApi.get('/api/categories', this.state.config)
-      .then((response: any) => {
-        console.log(response.data);
-        this.setState({ categories: response.data.categories }, () => {
 
+    WebApi.get('/api/categories', this.state.config)
+      .then((resp: any) => {
+        this.setState({ categories: resp.data.categories }, () => {
           if (this.props.match.params.id != undefined) {
             WebApi.get(`/api/items/${this.props.match.params.id}`, this.state.config)
               .then((response: any) => {
-                console.log(response.data);
-                
+                let defId = response.data.category == undefined ? 0 : response.data.category.id;
+                let currCategory = defId == 0 ? 'Default' : this.state.categories.find(x => x.id == defId)['name'];
+
                 this.setState({
-                  item: response.data,
+                  checkOptions: this.convertOptions(response.data.options),
                   name: response.data.name,
                   price: response.data.daily_price_cents,
-                  categoryId: response.data.category.id,
-                  currentCategorie: this.state.categories.find(x => x.id == response.data.category.id)['name']
+                  categoryId: defId,
+                  currentCategory: currCategory
                 });
               });
           }
@@ -52,7 +58,6 @@ class CreateItem extends React.Component<Props, any> {
       });
 
   }
-  
   getOptionFront(name: string) {
     let front: Array<JSX.Element> = [];
 
@@ -63,7 +68,7 @@ class CreateItem extends React.Component<Props, any> {
             <div key={option.id} className={styles['check-div']}>
               {this.props.match.params.id != undefined ?
                 <label>
-                  <input type="checkbox" defaultChecked={this.state.item.options.includes(option.id)} value={option.option_value} onChange={(e) => this.handleCheck(e, option.id)} />{option.option_value}
+                  <input type="checkbox" defaultChecked={this.state.checkOptions.includes(option.id)} value={option.option_value} onChange={(e) => this.handleCheck(e, option.id)} />{option.option_value}
                 </label>
                 :
                 <label>
@@ -78,7 +83,7 @@ class CreateItem extends React.Component<Props, any> {
     return front;
   }
   handleSelect = event => {
-    this.setState({ currentCategorie: event.target.value, checkOptions: [], categoryId: event.target.selectedIndex });
+    this.setState({ currentCategory: event.target.value, checkOptions: [], categoryId: event.target.selectedIndex });
   }
   handleCheck = (event, id) => {
     if (event.target.checked) {
@@ -100,7 +105,7 @@ class CreateItem extends React.Component<Props, any> {
   }
   handleSubmit = event => {
     event.preventDefault();
-    const {name, price, categories, checkOptions, currentCategorie, config} = this.state;
+    const { name, price, categories, checkOptions, currentCategory, config } = this.state;
 
     if (name === '' || price === '') {
       alert("заповніть поля назви та ціни");
@@ -110,7 +115,7 @@ class CreateItem extends React.Component<Props, any> {
           item: {
             daily_price_cents: price,
             name: name,
-            category_id: categories.find(x => x.name === currentCategorie).id,
+            category_id: categories.find(x => x.name === currentCategory).id,
             option_ids: checkOptions
           }
         }
@@ -121,18 +126,25 @@ class CreateItem extends React.Component<Props, any> {
             daily_price_cents: price
           }
         }
+      if (this.props.match.params.id != undefined) {
+        WebApi.patch(`/api/items/${this.props.match.params.id}`, data, config)
+          .then((response: any) => {
+            console.log(response);
+          });
+        alert("* " + name + ' * is update !');
 
-      WebApi.post('/api/items', data, config)
-        .then((response: any) => {
-          console.log(response);
-        });
-      alert("* " + name + ' * is create !');
+      } else {
+        WebApi.post('/api/items', data, config)
+          .then((response: any) => {
+            console.log(response);
+          });
+        alert("* " + name + ' * is create !');
+      }
     }
   }
 
   render() {
-    console.log(this.state.currentCategorie);
-    let front = this.getOptionFront(this.state.currentCategorie);
+    let front = this.getOptionFront(this.state.currentCategory);
 
     return <form onSubmit={this.handleSubmit}>
       <div className={styles['create-container']}>
@@ -147,8 +159,8 @@ class CreateItem extends React.Component<Props, any> {
           ]}
 
         <div className={styles.label}>Categories</div>
-        <select onChange={this.handleSelect} defaultValue={this.state.currentCategorie}>
-          <option id="0" value="Default">Default</option>
+        <select onChange={this.handleSelect} value={this.state.currentCategory}>
+          <option value="Default" >Default</option>
           {this.state.categories.map((element) => (
             <option key={element.key} value={element.name}>{element.name}</option>
           ))}

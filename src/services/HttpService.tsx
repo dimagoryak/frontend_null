@@ -11,14 +11,6 @@ class WebApi {
         })
     }
 
-    static delete(endPoint: string, configs?: any) {
-        return new Promise((resolve, reject) => {
-            axios.delete(`${API_URL}${endPoint}`, configs)
-                .then(response => resolve(response))
-                .catch(error => reject(error))
-        })
-    }
-
     static post(endPoint: string, params: any, configs?: any) {
         
         return new Promise((resolve, reject) => {
@@ -27,6 +19,24 @@ class WebApi {
                 .catch(error => reject(error))
         })
     }
+
+    static delete(endPoint: string, configs?: any) {
+        return new Promise((resolve, reject) => {
+            axios.delete(`${API_URL}${endPoint}`, configs)
+                .then(response => resolve(response))
+                .catch(error => reject(error))
+        })
+    }
+
+    static patch(endPoint: string, params: any, configs?: any) {
+        
+        return new Promise((resolve, reject) => {
+            axios.patch(`${API_URL}${endPoint}`, params, configs)
+                .then(response => resolve(response))
+                .catch(error => reject(error))
+        })
+    }
+
 }
 
 export default WebApi;
