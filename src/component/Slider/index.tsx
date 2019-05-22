@@ -6,7 +6,6 @@ interface Props {
     comments: Array<IComment>;
 }
 
-
 export default class SimpleSlider extends React.Component<Props, any> {
     constructor(props: Props) {
         super(props);

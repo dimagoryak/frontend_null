@@ -1,0 +1,97 @@
+.product-container {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    min-height: 100vh;
+
+    h2 {
+        font-size: 2em;
+        font-weight: 500;
+        color: black;
+        margin: 100px auto 0 auto;
+    }
+
+    h4 {
+        font-size: 1em;
+        font-weight: 400;
+        margin: 28px auto 60px auto;
+    }
+
+    .block-products {
+        max-width: 1350px;
+        display: flex;
+        flex-flow: row-reverse wrap-reverse;  
+        justify-content: flex-end;      
+        align-items: flex-start;
+
+        .block-product {
+            background: white;
+            padding: 10px;
+            margin:0 auto;
+            margin-bottom: 50px;
+            align-self: center;
+            justify-self:flex-start;
+
+            .block-image {
+                width: 200px;
+                height: 120px;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .info {
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    font-size:0.8em;
+                    font-weight: 500;
+                    color: #8b8b8b;
+                    display: inline-block;
+                    margin: 5px 0 0 0;
+                }
+            }
+
+            .two-button {
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+    
+                a:hover {
+                    background-color: rgba(149, 204, 188, 0.6);
+                    color:#6ca964;
+                }
+    
+                a:active {
+                    position: relative;
+                    top: 1px;
+                }
+    
+                a {
+                    font-size:0.8em;
+                    padding: 8px 15px 8px 15px;
+                    margin: 15px 5px 5px 5px;
+                    color: whitesmoke;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;        
+                    border-radius: .5em;
+                    border:0;          
+                }
+                .del{
+                    background-color: #4DADBB;
+                }
+                .upd{
+                    background-color: #6ca964;
+                }
+            }
+        }
+    }
+}

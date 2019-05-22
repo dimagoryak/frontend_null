@@ -11,14 +11,18 @@ class WebApi {
         })
     }
 
-    static post(endPoint: string, params: any) {
-        const config = {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }
+    static delete(endPoint: string, configs?: any) {
         return new Promise((resolve, reject) => {
-            axios.post(`${API_URL}${endPoint}`, params, config)
+            axios.delete(`${API_URL}${endPoint}`, configs)
+                .then(response => resolve(response))
+                .catch(error => reject(error))
+        })
+    }
+
+    static post(endPoint: string, params: any, configs?: any) {
+        
+        return new Promise((resolve, reject) => {
+            axios.post(`${API_URL}${endPoint}`, params, configs)
                 .then(response => resolve(response))
                 .catch(error => reject(error))
         })

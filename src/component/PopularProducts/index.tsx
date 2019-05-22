@@ -28,7 +28,7 @@ export default class PopularProducts extends React.Component<Props, any> {
             </div>
           ))}
         </div>
-        <Link to="/">All products</Link>
+        <Link to="/items">All products</Link>
       </div>
     );
   }

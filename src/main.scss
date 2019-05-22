@@ -43,8 +43,6 @@ body {
   }
 }
 
-// [class*="dfghj"]{}
-
 .slick-slider {
   padding: 0 5% 0 5%;
 }
@@ -57,12 +55,16 @@ body {
 
   &:not(.slick-center) {
     z-index: -1;
-    transform: translate(350px,10px) scale(.6);
+    transform: translate(350px, 10px) scale(.6);
+
+    div>div {
+      background-color: rgba(247, 246, 249, 0.5);
+    }
   }
 
-  &.slick-center{
-    +.slick-slide{
-      transform: translate(-350px,10px) scale(.6);
+  &.slick-center {
+    +.slick-slide {
+      transform: translate(-350px, 10px) scale(.6);
     }
   }
 }

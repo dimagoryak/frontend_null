@@ -25,13 +25,19 @@ class SignUpForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const data = {
+    let data = {
       user: {
         email: this.state.login,
         password: this.state.pass
       }
     }
-    WebApi.post('/api/sign_up', data)
+    let config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+
+    WebApi.post('/api/sign_up', data, config)
       .then((response: any) => {
         console.log(response);
       });
@@ -46,7 +52,6 @@ class SignUpForm extends React.Component {
         <input className={classname(`font`)} type="text" name="login" placeholder="login" onChange={this.handleEmail}></input>
         <input className={classname(`font`)} type="password" name="pass" placeholder="password" onChange={this.handlePass}></input>
         <button className={classname(`font`)} type="submit">Sign Up</button>
-        <p>{this.state.token}</p>
       </div>
     </form>
   }

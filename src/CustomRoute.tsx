@@ -21,8 +21,8 @@ const AuthRoute = ({ component: Component, ...rest }) => {
     );
 }
 
-export default {
-    PrivateRoute
+export {
+    PrivateRoute,
+    AuthRoute
 };
-export { AuthRoute };
 

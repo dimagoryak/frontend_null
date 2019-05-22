@@ -10,8 +10,8 @@ class Header extends React.Component<{}, { label1: string, label2: string }> {
   constructor(props) {
     super(props);
     this.state = {
-      label1: localStorage.getItem("UserEmail") != undefined ? localStorage.getItem("UserEmail") as string : 'log in',
-      label2: localStorage.getItem("UserEmail") != undefined ? 'exit' : 'sign up'
+      label1: !!localStorage.getItem("UserEmail") ? localStorage.getItem("UserEmail") as string : 'log in',
+      label2: !!localStorage.getItem("UserEmail") ? 'exit' : 'sign up'
     };
   }
 
@@ -29,7 +29,8 @@ class Header extends React.Component<{}, { label1: string, label2: string }> {
           <Link to="/"><img alt="logo" src={logo} /></Link>
         </div>
         <nav className={styles.navbar}>
-          <Link to="/">all products</Link>
+          {!!localStorage.getItem("UserEmail") ? <Link to="/create">create products</Link> : ''}
+          <Link to="/items">all products</Link>
           <Link to="/abra">about us</Link>
           <Link to="/signIn" className={styles['before-sign']}>{this.state.label1}</Link>
           <Link to="/signUp" onClick={this.exitFunc} className={styles['sign-button']}>{this.state.label2}</Link>

@@ -21,21 +21,29 @@ class SignInForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+
     let data = {
       auth: {
         email: this.state.login,
         password: this.state.pass
       }
     }
-    WebApi.post('/api/user_token', data)
+    let config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+
+    WebApi.post('/api/user_token', data, config)
       .then((response: any) => {
-        this.setState({ token: response.data.jwt });
+        this.setState({ token: response.data.jwt }, () => {
+          localStorage.clear();
+          localStorage.setItem('JWToken', this.state.token);
+          localStorage.setItem('UserEmail', this.state.login);
+          location.replace('/');
+        });
       });
 
-    localStorage.clear();
-    localStorage.setItem('JWToken', this.state.token);
-    localStorage.setItem('UserEmail', this.state.login);
-    location.replace('/');
   }
 
 
